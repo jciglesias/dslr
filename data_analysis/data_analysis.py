@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from .table_stats import stats_table
+from .stats_table import stats_table
 
 class DataAnalysis:
     def __init__(self):
@@ -18,5 +18,8 @@ class DataAnalysis:
     def get_stats(self):
         """Return descriptive stats using stats_table if CSV exists"""
         if self.csv_uploaded and self.df is not None:
-            return stats_table(self.df)
+            whitelist = ["Arithmancy", "Astronomy", "Herbology", "Defense Against the Dark Arts", 
+            "Divination", "Muggle Studies", "Ancient Runes", "History of Magic", "Transfiguration",
+            "Potions", "Care of Magical Creatures", "Charms", "Flying"]
+            return stats_table(self.df, whitelist=whitelist)
         return None
