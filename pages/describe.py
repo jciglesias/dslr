@@ -1,11 +1,10 @@
 import streamlit as st
+import pandas as pd
+from stats.table_stats import stats_table
 
-tmp = {
-    'statistics': ['count','mean', 'std', 'min','P25', 'P50', 'P75', 'max'],
-    'Feature1': range(8),
-    'Feature2': range(10,18),
-    'Feature3': range(20,28),
-    'Feature4': range(30,38),
-}
+csv_data = st.file_uploader("Upload your CSV file", type=["csv"])
 
-st.dataframe(tmp)
+if csv_data is not None:
+    df = pd.read_csv(csv_data)
+    described_data = stats_table(df)
+    st.dataframe(described_data)
