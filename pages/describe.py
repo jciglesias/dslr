@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 from stats.table_stats import stats_table
 
-# csv_data = st.file_uploader("Upload your CSV file", type=["csv"])
-
 if "df" in st.session_state:
     df = st.session_state.df
     described_data = stats_table(df)
