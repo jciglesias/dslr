@@ -6,6 +6,7 @@ class DataAnalysis:
     def __init__(self):
         self.df = None
         self.csv_uploaded = False
+        self.table_result = None
 
     def upload_csv(self, csv_file):
         """Load CSV file into DataFrame and set uploaded flag"""
@@ -21,5 +22,6 @@ class DataAnalysis:
             whitelist = ["Arithmancy", "Astronomy", "Herbology", "Defense Against the Dark Arts", 
             "Divination", "Muggle Studies", "Ancient Runes", "History of Magic", "Transfiguration",
             "Potions", "Care of Magical Creatures", "Charms", "Flying"]
-            return stats_table(self.df, whitelist=whitelist)
+            self.table_result = stats_table(self.df, whitelist=whitelist)
+            return self.table_result
         return None
