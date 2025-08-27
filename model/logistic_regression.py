@@ -1,4 +1,4 @@
-from functions import sigmoid, cost
+from model.functions import sigmoid, cost, handle_nan_in_matrix
 import numpy as np
 
 class LogisticRegression:
@@ -25,9 +25,12 @@ class LogisticRegression:
             X: Feature matrix (m x n)
             y: Target vector (m x 1) - should be 0 or 1 for binary classification
         """
+        # Handle NaN values in X by replacing with column means
+        X_clean = handle_nan_in_matrix(X)
+        
         # Add bias term (intercept)
-        m, n = X.shape
-        X_with_bias = np.column_stack([np.ones(m), X])
+        m, n = X_clean.shape
+        X_with_bias = np.column_stack([np.ones(m), X_clean])
         
         # Initialize weights
         self.theta = np.zeros(n + 1)
@@ -71,9 +74,12 @@ class LogisticRegression:
         if self.theta is None:
             raise ValueError("Model must be trained first")
         
+        # Handle NaN values in X by replacing with column means
+        X_clean = handle_nan_in_matrix(X)
+        
         # Add bias term
-        m = X.shape[0]
-        X_with_bias = np.column_stack([np.ones(m), X])
+        m = X_clean.shape[0]
+        X_with_bias = np.column_stack([np.ones(m), X_clean])
         
         # Compute probabilities
         z = X_with_bias.dot(self.theta)
