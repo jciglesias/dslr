@@ -3,6 +3,8 @@ from model.logistic_regression import OneVsAllClassifier
 import pandas as pd
 import numpy as np
 
+columns_to_use = ['Herbology', 'Astronomy', 'Ancient Runes']
+
 if 'df' in st.session_state:
     train, predict = st.tabs(["Train", "Predict"])
 
@@ -16,7 +18,7 @@ if 'df' in st.session_state:
         if not st.session_state.model_trained:
             if st.button("Train Model"):
                 # X = df.drop(columns=['Hogwarts House','Index', 'First Name', 'Last Name', 'Birthday', 'Best Hand'])
-                X = df[['Herbology', 'Astronomy', 'Ancient Runes']]
+                X = df[columns_to_use]
                 y = df['Hogwarts House']
                 
                 # DEBUG: Check data before training
@@ -41,7 +43,7 @@ if 'df' in st.session_state:
             if uploaded_file is not None:
                 input_df = pd.read_csv(uploaded_file)
                 # X_input = input_df.drop(columns=['Index', 'First Name', 'Last Name', 'Birthday', 'Best Hand', 'Hogwarts House'], errors='ignore')
-                X_input = input_df[['Herbology', 'Astronomy', 'Ancient Runes']]
+                X_input = input_df[columns_to_use]
                 
                 # DEBUG: Check prediction data
                 st.write("**Prediction Data Check:**")
