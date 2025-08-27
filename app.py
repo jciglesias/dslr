@@ -15,7 +15,8 @@ def main():
     if "df" not in st.session_state:
         csv_data = st.file_uploader("Upload your CSV file", type=["csv"])
         if csv_data is not None:
-            data_analysis.upload_csv(csv_data)
+            st.session_state.df = pd.read_csv(csv_data)
+            data_analysis.df = st.session_state.df
 
     if 'df' in st.session_state and st.session_state.df is not None:
         st.dataframe(st.session_state.df)
