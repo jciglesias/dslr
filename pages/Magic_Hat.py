@@ -3,7 +3,7 @@ from model.logistic_regression import OneVsAllClassifier
 import pandas as pd
 import numpy as np
 
-columns_to_use = ['Herbology', 'Astronomy', 'Ancient Runes']
+columns_to_use = ['Herbology', 'Astronomy', 'Ancient Runes', 'Charms', 'Defense Against the Dark Arts']
 
 if 'df' in st.session_state:
     train, predict = st.tabs(["Train", "Predict"])
@@ -17,17 +17,8 @@ if 'df' in st.session_state:
             st.session_state.model_trained = False
         if not st.session_state.model_trained:
             if st.button("Train Model"):
-                # X = df.drop(columns=['Hogwarts House','Index', 'First Name', 'Last Name', 'Birthday', 'Best Hand'])
                 X = df[columns_to_use]
                 y = df['Hogwarts House']
-                
-                # DEBUG: Check data before training
-                st.write("**Training Data Check:**")
-                st.write(f"X shape: {X.shape}, y shape: {y.shape}")
-                st.write(f"X has NaN: {X.isnull().sum().sum()}")
-                st.write(f"y has NaN: {y.isnull().sum()}")
-                st.write(f"Houses: {y.unique()}")
-                st.write(f"X range: min={X.min().min():.2f}, max={X.max().max():.2f}")
                 
                 model.fit(X.values, y.values)
                 st.session_state.model_trained = True
@@ -44,13 +35,7 @@ if 'df' in st.session_state:
                 input_df = pd.read_csv(uploaded_file)
                 # X_input = input_df.drop(columns=['Index', 'First Name', 'Last Name', 'Birthday', 'Best Hand', 'Hogwarts House'], errors='ignore')
                 X_input = input_df[columns_to_use]
-                
-                # DEBUG: Check prediction data
-                st.write("**Prediction Data Check:**")
-                st.write(f"X_input shape: {X_input.shape}")
-                st.write(f"X_input has NaN: {X_input.isnull().sum().sum()}")
-                st.write(f"X_input range: min={X_input.min().min():.2f}, max={X_input.max().max():.2f}")
-                
+ 
                 probabilities = st.session_state.model.predict_proba(X_input.values)
                 predictions = st.session_state.model.predict(X_input.values)
                 
