@@ -33,18 +33,10 @@ if 'df' in st.session_state:
             uploaded_file = st.file_uploader("Choose a file", type="csv")
             if uploaded_file is not None:
                 input_df = pd.read_csv(uploaded_file)
-                # X_input = input_df.drop(columns=['Index', 'First Name', 'Last Name', 'Birthday', 'Best Hand', 'Hogwarts House'], errors='ignore')
                 X_input = input_df[columns_to_use]
  
                 probabilities = st.session_state.model.predict_proba(X_input.values)
                 predictions = st.session_state.model.predict(X_input.values)
-                
-                # DEBUG: Check predictions
-                st.write("**Prediction Results Check:**")
-                st.write(f"Unique predictions: {np.unique(predictions)}")
-                st.write(f"Prediction counts: {np.bincount([list(st.session_state.model.classes).index(p) for p in predictions])}")
-                for house, probs in probabilities.items():
-                    st.write(f"{house} probs: min={probs.min():.3f}, max={probs.max():.3f}, mean={probs.mean():.3f}")
                 
                 results_df = input_df.copy()
                 results_df['Predicted House'] = predictions
