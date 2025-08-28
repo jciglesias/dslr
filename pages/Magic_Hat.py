@@ -42,8 +42,8 @@ if 'df' in st.session_state:
                 results_df['Predicted House'] = predictions
                 for house, probs in probabilities.items():
                     results_df[f'Prob_{house}'] = probs
-                
-                st.write(results_df)
+
+                st.write(results_df[['Hogwarts House', 'Predicted House', 'Prob_Gryffindor', 'Prob_Hufflepuff', 'Prob_Ravenclaw', 'Prob_Slytherin']])
         else:
             st.warning("Please train the model first on the Train tab.")
 
