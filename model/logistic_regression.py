@@ -1,5 +1,6 @@
 from model.functions import sigmoid, cost, handle_nan_in_matrix
 import numpy as np
+import os
 
 class LogisticRegression:
     def __init__(self, learning_rate=0.01, max_iterations=1000, tolerance=1e-6):
@@ -144,7 +145,11 @@ class OneVsAllClassifier:
                 tolerance=self.tolerance
             )
             classifier.fit(X, binary_y)
-            
+
+            # Save weights
+            # os.makedirs("model_weights", exist_ok=True)
+            np.save(f"{class_name}_weights.npy", classifier.get_weights())
+
             self.classifiers[class_name] = classifier
         
         return self
@@ -181,6 +186,8 @@ class OneVsAllClassifier:
         predicted_indices = np.argmax(prob_matrix, axis=1)
         predicted_classes = self.classes[predicted_indices]
         
+        # Save predictions to a file
+        np.savetxt("predictions.txt", zip(range(len(predicted_classes)), predicted_classes), fmt="%s")
         return predicted_classes
     
     def get_weights(self):
