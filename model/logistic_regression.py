@@ -144,7 +144,11 @@ class OneVsAllClassifier:
                 tolerance=self.tolerance
             )
             classifier.fit(X, binary_y)
-            
+
+            # Save weights
+            # os.makedirs("model_weights", exist_ok=True)
+            np.save(f"{class_name}_weights.npy", classifier.get_weights())
+
             self.classifiers[class_name] = classifier
         
         return self
@@ -181,6 +185,11 @@ class OneVsAllClassifier:
         predicted_indices = np.argmax(prob_matrix, axis=1)
         predicted_classes = self.classes[predicted_indices]
         
+        # Save predictions to a file
+        with open("predictions.txt", "w") as f:
+            f.write("Index,Hogwarts House\n")
+            for idx, pred in enumerate(predicted_classes):
+                f.write(f"{idx},{pred}\n")
         return predicted_classes
     
     def get_weights(self):
