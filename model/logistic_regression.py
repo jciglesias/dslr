@@ -186,7 +186,10 @@ class OneVsAllClassifier:
         predicted_classes = self.classes[predicted_indices]
         
         # Save predictions to a file
-        np.savetxt("predictions.txt", predicted_classes, fmt="%s")
+        with open("predictions.txt", "w") as f:
+            f.write("Index,Hogwarts House\n")
+            for idx, pred in enumerate(predicted_classes):
+                f.write(f"{idx},{pred}\n")
         return predicted_classes
     
     def get_weights(self):
