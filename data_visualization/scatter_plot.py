@@ -37,7 +37,7 @@ def show_scatter_plot(df):
 
     # --- Auto-detect: Top most different (negative correlation) ---
     most_different = find_correlated_pairs(df, top_n=4, sign="negative")
-    plot_correlation_pairs(df, most_different, title="Most different feature pair")
+    plot_correlation_pairs(df, most_different, title="Most opposite feature pair")
 
     # --- Allow manual exploration ---
     st.markdown("### 🔎 Explore other pairs")
