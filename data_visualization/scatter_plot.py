@@ -23,7 +23,7 @@ def plot_correlation_pairs(df, pairs_df, title="Correlation pairs", height=300):
                         opacity=0.7,
                     )
                     fig.update_layout(height=height)
-                    st.plotly_chart(fig, use_container_width=True)
+                    st.plotly_chart(fig, width='stretch')
 
 def show_scatter_plot(df):
     question = "What are the two features that are similar?"
@@ -54,4 +54,4 @@ def show_scatter_plot(df):
             title=f"Scatter plot of {x_subject} vs {y_subject}",
             opacity=0.7,
         )
-        st.plotly_chart(fig_custom, use_container_width=True)
+        st.plotly_chart(fig_custom, width='stretch')

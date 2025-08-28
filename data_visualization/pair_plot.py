@@ -46,4 +46,4 @@ def show_pair_plot(df):
         font=dict(size=10)
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')

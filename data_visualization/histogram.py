@@ -19,7 +19,7 @@ def show_histogram(df):
         color_discrete_map=DataVisualization.get_house_colors()
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
     # === Grid version of all the subjects ===
     st.markdown("### 📊 All courses")
@@ -44,4 +44,4 @@ def show_histogram(df):
                         color_discrete_map=DataVisualization.get_house_colors()
                     )
                     fig.update_layout(height=300)
-                    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+                    st.plotly_chart(fig, width='stretch', config={"displayModeBar": False})

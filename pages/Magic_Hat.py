@@ -46,7 +46,7 @@ if 'df' in st.session_state:
 
                 st.dataframe(
                     results_df[['Hogwarts House', 'Predicted House', 'Prob_Gryffindor', 'Prob_Hufflepuff', 'Prob_Ravenclaw', 'Prob_Slytherin']],
-                    use_container_width=True,
+                    width='stretch',
                     column_config={
                         'Prob_Gryffindor': st.column_config.NumberColumn('Prob_Gryffindor', format='percent'),
                         'Prob_Hufflepuff': st.column_config.NumberColumn('Prob_Hufflepuff', format='percent'),
