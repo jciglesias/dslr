@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 
 columns_to_use = ['Herbology', 'Astronomy', 'Ancient Runes', 'Charms', 'Defense Against the Dark Arts']
+# columns_to_use = ['Astronomy', 'Ancient Runes', 'Charms', 'Herbology', 'History of Magic', 'Muggle Studies']
 
 if 'df' in st.session_state:
     train, predict = st.tabs(["Train", "Predict"])
@@ -43,7 +44,15 @@ if 'df' in st.session_state:
                 for house, probs in probabilities.items():
                     results_df[f'Prob_{house}'] = probs
 
-                st.write(results_df[['Hogwarts House', 'Predicted House', 'Prob_Gryffindor', 'Prob_Hufflepuff', 'Prob_Ravenclaw', 'Prob_Slytherin']])
+                st.dataframe(
+                    results_df[['Hogwarts House', 'Predicted House', 'Prob_Gryffindor', 'Prob_Hufflepuff', 'Prob_Ravenclaw', 'Prob_Slytherin']],
+                    use_container_width=True,
+                    column_config={
+                        'Prob_Gryffindor': st.column_config.NumberColumn('Prob_Gryffindor', format='percent'),
+                        'Prob_Hufflepuff': st.column_config.NumberColumn('Prob_Hufflepuff', format='percent'),
+                        'Prob_Ravenclaw': st.column_config.NumberColumn('Prob_Ravenclaw', format='percent'),
+                        'Prob_Slytherin': st.column_config.NumberColumn('Prob_Slytherin', format='percent'),
+                    })
         else:
             st.warning("Please train the model first on the Train tab.")
 
