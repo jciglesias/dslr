@@ -31,13 +31,13 @@ def show_scatter_plot(df):
 
     subjects = DataVisualization.get_subjects()
 
-    # --- Auto-detect top correlated pairs ---
-    top_pairs = find_correlated_pairs(df, top_n=4, most=True)
-    plot_correlation_pairs(df, top_pairs, title="Top correlated feature pairs")
-    
-    # --- Auto-detect least correlated pairs ---
-    least_pairs = find_correlated_pairs(df, top_n=4, most=False)
-    plot_correlation_pairs(df, least_pairs, title="Least correlated feature pairs")
+    # --- Auto-detect: Top most similar (positive correlation) ---
+    top_similar = find_correlated_pairs(df, top_n=4, sign="positive")
+    plot_correlation_pairs(df, top_similar, title="Most similar feature pair")
+
+    # --- Auto-detect: Top most different (negative correlation) ---
+    most_different = find_correlated_pairs(df, top_n=4, sign="negative")
+    plot_correlation_pairs(df, most_different, title="Most different feature pair")
 
     # --- Allow manual exploration ---
     st.markdown("### 🔎 Explore other pairs")

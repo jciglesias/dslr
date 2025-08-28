@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from sklearn.datasets import make_blobs
-from data_visualization import show_histogram, show_scatter_plot
+from data_visualization import show_histogram, show_scatter_plot, show_pair_plot
 
 histogram, scatter, pair = st.tabs(["Histogram", "Scatter Plot", "Pair Plot"])
 
@@ -22,4 +21,7 @@ with scatter:
 
 with pair:
     st.header("Pair Plot")
-    st.write("This is where you can create a pair plot.")
+    if "df" in st.session_state and st.session_state.df is not None:
+        show_pair_plot(st.session_state.df)
+    else:
+        st.warning("Please upload a CSV file in the main page first.")
