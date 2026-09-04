@@ -18,7 +18,7 @@
 - Modeling: [model/logistic_regression.py](model/logistic_regression.py), [model/functions.py](model/functions.py)
 - Higher-level entry points / pages: [pages/Describe.py](pages/Describe.py), [pages/Data_Visualization.py](pages/Data_Visualization.py), [pages/Magic_Hat.py](pages/Magic_Hat.py)
 
-**Quick Start (for recruiters / technical reviewers)**
+**Quick Start**
 1. Create a virtual environment and install dependencies:
 
 ```bash
